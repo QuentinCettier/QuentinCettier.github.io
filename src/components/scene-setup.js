@@ -1,3 +1,6 @@
+import * as THREE from 'three'
+let OrbitControls = require('three-orbit-controls')(THREE)
+
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000)
 camera.position.z = 100 
@@ -11,16 +14,21 @@ camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 })
 
-var light = new THREE.PointLight(0xFFFF00);
-light.position.set(10, 0, 25);
-scene.add(light);
+let controls = new OrbitControls(camera) 
+
+var light = new THREE.PointLight(0xFFFF00)
+light.position.set(10, 0, 25)
+scene.add(light)
+
+var light = new THREE.AmbientLight( 0x404040 )
+scene.add(light)
 
 let cubes = []
 
 class Cube {
     constructor(x, y, z) {
-        this.cube = new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), new THREE.MeshLambertMaterial({
-            color: 0xfd59d7
+        this.cube = new THREE.Mesh(new THREE.SphereGeometry( 0.2, 32, 32 ), new THREE.MeshLambertMaterial({
+            color: 0xfefefe
         }))
         this.cube.position.x = x
         this.cube.position.y = y
@@ -33,6 +41,7 @@ class Cube {
     move() {
         this.cube.rotation.x += 0.01
         this.cube.rotation.y += 0.01
+        this.cube.position.z += 0.1
     }
 }
 
