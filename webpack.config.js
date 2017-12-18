@@ -66,7 +66,17 @@ module.exports = {
             //     collapseWhitespace: true
             // },
             // hash: true,
+            filename: 'index.html', 
             template: './src/templates/index.ejs'
+        }),
+        new HtmlWebpackPlugin({
+            title: 'page1',
+            // minify: {
+            //     collapseWhitespace: true
+            // },
+            // hash: true,
+            filename: 'page1.html', 
+            template: './src/templates/page1.ejs'
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
