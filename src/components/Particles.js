@@ -22,6 +22,5 @@ class Particles
         context.arc(this.posx, this.posy, this.radius, 0, Math.PI*2, false)
         context.fill()
         context.closePath()
-
     }   
 }

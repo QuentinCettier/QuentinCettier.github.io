@@ -28,5 +28,9 @@
     "dev": "webpack-dev-server",
     "prod": "npm run clean && cross-env NODE_ENV=production webpack",
     "clean": "rimraf ./dist/*"
+  },
+  "dependencies": {
+    "three": "^0.88.0",
+    "three-orbit-controls": "^82.1.0"
   }
 }
