@@ -1,5 +1,4 @@
 import './sass/app.scss'
-import './components/main.js'
-import './components/scene-setup.js'
 import './components/Particles.js'
-import './components/mainCanvas.js'
+import './components/main.js'
+// import './components/mainCanvas.js'
