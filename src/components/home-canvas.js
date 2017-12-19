@@ -45,12 +45,18 @@ let particleCount = 300
 //Create the particles and push them into the array
 const initialize = () =>
 {
-    for(i = 0; i<particleCount; i++)
+    for(let i = 0; i<particleCount; i++)
     {
         const particle = new Particles()
         particleArray.push(particle)        
     }
     animate()   
+    resizeCanvas()
+}
+
+const resizeCanvas = () => {
+    $canvas.width = window.innerWidth
+    $canvas.height = window.innerHeight
 }
 
 //Animate all the particles
@@ -110,3 +116,5 @@ document.addEventListener('mousemove', (e) =>
     }
 })
 initialize()
+
+window.addEventListener('resize', resizeCanvas) 
