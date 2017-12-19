@@ -38,6 +38,13 @@ module.exports = {
                     // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=images/',
                     'image-webpack-loader'
                 ]
+            },
+            {
+                test: /\.json?/,
+                use: [
+                    'file-loader?name=data/[name].[ext]',
+                    // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=images/',
+                ]
             }
         ]
     },
