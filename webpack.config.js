@@ -2,7 +2,6 @@ var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var path = require('path')
-
 var isProd = process.env.NODE_ENV === 'production'
 var cssDev = ['style-loader', 'css-loader', 'sass-loader']
 var cssProd = ExtractTextPlugin.extract({
@@ -15,7 +14,8 @@ var cssConfig = isProd ? cssProd : cssDev
 module.exports = {
     entry: {
         'vendor': './src/vendor.js',
-        'app': './src/app.js'
+        'home': './src/home.js',
+        'story': './src/story.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -35,10 +35,10 @@ module.exports = {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
                     'file-loader?name=images/[name].[ext]',
-                    // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=images/',
                     'image-webpack-loader'
                 ]
             },
+<<<<<<< HEAD
             // {
             //     test: /\.(otf|eot|svg|ttf|woff|woff2)$/,
             //     use: 'file-loader?name=font/[name].[ext]'
@@ -46,6 +46,13 @@ module.exports = {
             {    
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
                 loader: "file-loader"
+=======
+            {
+                test: /\.json?/,
+                use: [
+                    'file-loader?name=data/[name].[ext]',
+                ]
+>>>>>>> 8b1b1669ff7cbc0278e9868c28524435c7561d42
             }
         ]
     },
@@ -74,7 +81,8 @@ module.exports = {
             //     collapseWhitespace: true
             // },
             // hash: true,
-            filename: 'index.html', 
+            filename: 'index.html',
+            excludeChunks: ['story'], 
             template: './src/templates/index.ejs'
         }),
         new HtmlWebpackPlugin({
@@ -83,7 +91,8 @@ module.exports = {
             //     collapseWhitespace: true
             // },
             // hash: true,
-            filename: 'page1.html', 
+            filename: 'page1.html',
+            excludeChunks: ['home'], 
             template: './src/templates/page1.ejs'
         }),
         new webpack.HotModuleReplacementPlugin(),
