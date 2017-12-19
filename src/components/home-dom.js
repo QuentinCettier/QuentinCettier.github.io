@@ -1,4 +1,23 @@
 import {TweenMax, Power2, TimelineLite} from "gsap";
+import Barba from 'barba.js'
+
+Barba.Pjax.start();
+Barba.Prefetch.init();
+
+var HideShowTransition = Barba.BaseTransition.extend({
+    start: function() {
+      this.newContainerLoading.then(this.finish.bind(this));
+    },
+  
+    finish: function() {
+      document.body.scrollTop = 0;
+      this.done();
+    }
+  });
+
+  Barba.Pjax.getTransition = function() {
+    return HideShowTransition;
+  };
 
 const $quoteContainer = Array.from(document.querySelectorAll('.quote-container'))
 const $quote = Array.from(document.querySelectorAll('.quote'))

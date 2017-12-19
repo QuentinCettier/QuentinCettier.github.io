@@ -76,14 +76,14 @@ module.exports = {
             template: './src/templates/index.ejs'
         }),
         new HtmlWebpackPlugin({
-            title: 'page1',
+            title: 'story',
             // minify: {
             //     collapseWhitespace: true
             // },
             // hash: true,
-            filename: 'page1.html',
+            filename: 'story.html',
             excludeChunks: ['home'], 
-            template: './src/templates/page1.ejs'
+            template: './src/templates/story.ejs'
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
