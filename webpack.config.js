@@ -13,8 +13,9 @@ var cssConfig = isProd ? cssProd : cssDev
 
 module.exports = {
     entry: {
-        'app': './src/app.js',
-        'vendor': './src/vendor.js'
+        'vendor': './src/vendor.js',
+        'home': './src/home.js',
+        'story': './src/story.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -34,8 +35,13 @@ module.exports = {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
                     'file-loader?name=images/[name].[ext]',
-                    // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=images/',
                     'image-webpack-loader'
+                ]
+            },
+            {
+                test: /\.json?/,
+                use: [
+                    'file-loader?name=data/[name].[ext]',
                 ]
             }
         ]
@@ -65,7 +71,19 @@ module.exports = {
             //     collapseWhitespace: true
             // },
             // hash: true,
+            filename: 'index.html',
+            excludeChunks: ['story'], 
             template: './src/templates/index.ejs'
+        }),
+        new HtmlWebpackPlugin({
+            title: 'page1',
+            // minify: {
+            //     collapseWhitespace: true
+            // },
+            // hash: true,
+            filename: 'page1.html',
+            excludeChunks: ['home'], 
+            template: './src/templates/page1.ejs'
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
