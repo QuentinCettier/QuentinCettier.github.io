@@ -14,8 +14,7 @@ var cssConfig = isProd ? cssProd : cssDev
 module.exports = {
     entry: {
         'vendor': './src/vendor.js',
-        'home': './src/home.js',
-        'story': './src/story.js'
+        'app': './src/app.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -37,6 +36,10 @@ module.exports = {
                     'file-loader?name=images/[name].[ext]',
                     'image-webpack-loader'
                 ]
+            },
+            {
+                test: /\.(otf|eot|svg|ttf|woff|woff2)$/,
+                use: 'file-loader?name=font/[name].[ext]'
             },
             {
                 test: /\.json?/,
@@ -67,23 +70,12 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             title: 'spacex',
-            // minify: {
-            //     collapseWhitespace: true
-            // },
-            // hash: true,
+            minify: {
+                collapseWhitespace: true
+            },
+            hash: true,
             filename: 'index.html',
-            excludeChunks: ['story'], 
-            template: './src/templates/index.ejs'
-        }),
-        new HtmlWebpackPlugin({
-            title: 'story',
-            // minify: {
-            //     collapseWhitespace: true
-            // },
-            // hash: true,
-            filename: 'story.html',
-            excludeChunks: ['home'], 
-            template: './src/templates/story.ejs'
+            template: './src/template/index.ejs'
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
