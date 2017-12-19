@@ -38,6 +38,14 @@ module.exports = {
                     // 'file-loader?name=[name].[ext]&outputPath=images/&publicPath=images/',
                     'image-webpack-loader'
                 ]
+            },
+            // {
+            //     test: /\.(otf|eot|svg|ttf|woff|woff2)$/,
+            //     use: 'file-loader?name=font/[name].[ext]'
+            // }
+            {    
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                loader: "file-loader"
             }
         ]
     },

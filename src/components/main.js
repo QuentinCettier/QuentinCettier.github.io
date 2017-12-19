@@ -1,3 +1,121 @@
+class Particles
+{
+    constructor()
+    {
+        this.originSpeed = Math.floor(Math.random()*12) / 10
+        this.originRadius = 2 * (Math.random())
+        this.radius = this.originRadius
+        this.posx = Math.floor((Math.random() * $canvas.width) + this.radius)
+        this.posy =  Math.floor((Math.random() * $canvas.height) + this.radius)
+        this.color = '#ffffff'
+        this.speed = this.originSpeed
+        this.opacity = Math.random()
+        this.direction = Math.random()
+    }
+
+    move()
+    {
+        context.beginPath()
+        context.globalCompositeOperation = 'source-over'
+        context.fillStyle = this.color
+        context.globalAlpha = this.opacity
+        context.arc(this.posx, this.posy, this.radius, 0, Math.PI*2, false)
+        context.fill()
+        context.closePath()
+
+        if(this.speed == 0)
+        {
+            this.speed = Math.floor(Math.random()*12) / 10
+        }
+        this.posy += this.speed/20
+
+        if(this.posy > $canvas.height)
+        {
+            this.posy = 0
+        }
+    }   
+}
+
+const $canvas = document.querySelector('.canvas-background')
+const context = $canvas.getContext('2d')
+//Canvas width and height
+$canvas.width = window.innerWidth
+$canvas.height = window.innerHeight
+
+let particleArray = []
+let particleCount = 300
+
+//Initialize the all scene
+//Create the particles and push them into the array
+const initialize = () =>
+{
+    for(let i = 0; i<particleCount; i++)
+    {
+        const particle = new Particles()
+        particleArray.push(particle)        
+    }
+    animate()   
+}
+
+//Animate all the particles
+const animate = () =>
+{
+    //clear canvas while animation
+    context.clearRect(0, 0, $canvas.width, $canvas.height)
+    //animate each particle of the array
+    for (let i = 0; i < particleCount-1; i++)
+    {
+       particleArray[i].move()
+    }
+    requestAnimationFrame(animate)
+}
+
+const coords = [{x: 0, y: 0}]
+const oldcoords = [{x: 0, y: 0}]
+
+document.addEventListener('mousemove', (e) =>
+{ 
+    oldcoords.x = coords.x
+    oldcoords.y = coords.y
+
+    coords.x = e.clientX
+    coords.y = e.clientY
+
+    if(coords.x < oldcoords.x && coords.y < oldcoords.y)
+    {
+        for(const particle of particleArray)
+        {
+            particle.posx += particle.speed/5
+            particle.posy += particle.speed/5
+        }
+    }
+    else if(coords.x < oldcoords.x && coords.y > oldcoords.y)
+    {
+        for(const particle of particleArray)
+        {
+            particle.posx += particle.speed/5
+            particle.posy -= particle.speed/5
+        }
+    }
+    else if(coords.x > oldcoords.x && coords.y > oldcoords.y)
+    {
+        for(const particle of particleArray)
+        {
+            particle.posx -= particle.speed/5
+            particle.posy -= particle.speed/5
+        }
+    }else
+    {
+        for(const particle of particleArray)
+        {
+            particle.posx -= particle.speed/5
+            particle.posy += particle.speed/5
+        }
+    }
+})
+initialize()
+
+//Main JS
 const $quoteContainer = Array.from(document.querySelectorAll('.quote-container'))
 const $quote = Array.from(document.querySelectorAll('.quote'))
 const $firstQuote = document.querySelector('.quote-1 .quote')
@@ -10,28 +128,29 @@ const $discoverButton = document.querySelector('.discover-button')
 const $copyright = document.querySelector('.copyright')
 const $about = document.querySelector('.link-container .link')
 
+
 const quoteArray = 
 [
     {
-        'firstwidth': '500',
-        'secondwidth': '200',
-        'thirdwidth': '370',
+        'firstwidth': '530',
+        'secondwidth': '220',
+        'thirdwidth': '410',
 
         'firstQuote' : '"When something is important enough,',
         'secondQuote' :  'you do it even if ',
-        'thirdQuote' :'the adds are not in your favor"'
+        'thirdQuote' :'the odds are not in your favor"'
     },
     {
-        'firstwidth': '440',
-        'secondwidth': '230',
-        'thirdwidth': '300',
+        'firstwidth': '500',
+        'secondwidth': '290',
+        'thirdwidth': '340',
         'firstQuote' :'"SpaceX designs, manufactures and ',
         'secondQuote' : 'launches advanced ',
         'thirdQuote' :'rockets and spacecraft"'
     },
     {
-        'firstwidth': '380',
-        'secondwidth': '270',
+        'firstwidth': '410',
+        'secondwidth': '290',
         'firstQuote' :'"Between success and failures,',
         'secondQuote' : 'SpaceX in all its data"'
     }
@@ -73,6 +192,7 @@ const randomQuote = () =>
 randomQuote()
 
 let tlFadeInMain = new TimelineLite()
+let animating = false
 
 tlFadeInMain
     .fromTo($about, 1, {y:50}, {y:0}, '+=1')
@@ -87,11 +207,39 @@ $discoverButton.addEventListener('click', () =>
         .fromTo($about, 1, {y:0}, {y:50})
         .fromTo($copyright, 1, {y:0}, {y:50}, '-=1')
         .fromTo($quote, .5, {y:0}, {y:50}, '-=1')
-        .fromTo($discoverButton, .4, {y:0}, {y:60}, '-=1')
+        .fromTo($discoverButton, .4, {y:0}, {y:60}, '-=1');
 
+    animating = true
+    switchPage()
 })
 
+let Req;
 const  transition = () =>
 {
+    for(const particle of particleArray)
+    {
+        particle.posy += particle.speed * 40
+    }
+    Req = requestAnimationFrame(transition)
     
 }
+
+const switchPage = () =>
+{
+    setTimeout(function()
+    {
+        cancelAnimationFrame(Req)
+        // ChangeUrl('Page 1', '/page1.html')
+    }, 4000);
+
+}
+
+// function ChangeUrl(title, url) {
+//     if (typeof (history.pushState) != "undefined") {
+//         let obj = { Title: title, Url: url }
+//         history.pushState(obj, obj.Title, obj.Url)
+
+//     } else {
+//         alert("Browser does not support HTML5.")
+//     }
+// }
