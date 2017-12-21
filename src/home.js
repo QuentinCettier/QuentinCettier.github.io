@@ -1,5 +1,5 @@
 //sass
-import './sass/app.scss'
+import './sass/home.scss'
 
 //js 
 import './components/home.js'

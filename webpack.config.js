@@ -1,11 +1,21 @@
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var path = require('path')
 var isProd = process.env.NODE_ENV === 'production'
 var cssDev = ['style-loader', 'css-loader', 'sass-loader']
 var cssProd = ExtractTextPlugin.extract({
-    use: (['css-loader', 'sass-loader']),
+    use: [{
+            loader: 'css-loader',
+            options: {
+                minimize: 'true'
+            }
+        },
+        {
+            loader: 'sass-loader'
+        }
+    ],
     fallback: 'style-loader',
     publicPath: '/dist'
 })
@@ -14,7 +24,7 @@ var cssConfig = isProd ? cssProd : cssDev
 module.exports = {
     entry: {
         'vendor': './src/vendor.js',
-        'app': './src/app.js',
+        'home': './src/home.js',
         'timeline': './src/timeline.js'
     },
     output: {
@@ -39,8 +49,8 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(otf|eot|svg|ttf|woff|woff2)$/,
-                use: 'file-loader?name=font/[name].[ext]'
+                test: /\.(woff|woff2|eot|ttf)$/,
+                loader: 'url-loader?limit=100000'
             },
             {
                 test: /\.json?/,
@@ -76,7 +86,7 @@ module.exports = {
             },
             hash: true,
             filename: 'index.html',
-            excludeChunks: ['timeline'], 
+            excludeChunks: ['timeline'],
             template: './src/templates/index.ejs'
         }),
         new HtmlWebpackPlugin({
@@ -86,13 +96,11 @@ module.exports = {
             },
             hash: true,
             filename: 'timeline.html',
-            excludeChunks: ['app'],
+            excludeChunks: ['home'],
             template: './src/templates/timeline.ejs'
         }),
-        new webpack.HotModuleReplacementPlugin(), 
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: 'common' 
-        // })
+        new UglifyJsPlugin()
     ]
 }
