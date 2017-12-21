@@ -2,3 +2,472 @@
 @import 'utils/_variables'; 
 //layout
 @import 'layout/_timeline-global'; 
+
+// @import url('https://fonts.googleapis.com/css?family=Bungee+Hairline|Signika:400,600');
+html,
+body
+{
+    overflow: hidden;
+    background: #343434;
+}
+
+.super-container
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    perspective: 800px;
+}
+
+.container
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-style: preserve-3d;
+    transform :rotateX(50deg) translateY(-380px);
+    transition: transform 2s ease-in-out;
+}
+
+.container .plan
+{
+    position: absolute;
+    width: 3000px;
+    height: 2000px;
+    top: -1000px;
+    left: -1500px;
+}
+
+.container .plan.index-1
+{
+    transform: translateZ(-0px) translateX(-500px) translateY(-200px);    
+}
+// .container .plan.index-6
+// {
+//     transform: translateZ(-0px) translateX(-510px) translateY(-2190px);    
+// }
+.container .plan.index-2
+{
+    transform: translateZ(-70px) rotate(180deg);
+
+}
+.container .plan.index-3
+{
+    transform: translateZ(-600px);
+    // background: url(../../images/stars-background);
+}
+
+.container .plan.index-4
+{
+    transform: translateZ(-70px) translateY(-1500px) rotate(180deg);
+
+}
+.container .plan.index-5
+{
+    transform: translateZ(-600px) translateY(-1500px) ;
+}
+
+
+.button-container
+{
+    z-index: 7;
+    position: absolute;
+    right: 2vw;
+    top: 45vh;
+}
+.button-container .nextButton, 
+.button-container .previousButton
+{
+    width: 50px;
+    height: 30px;
+    display: block;
+}
+.button-container .previousButton
+{
+    position: absolute;
+    top: 80px;
+    transition : transform .3s ease-in-out;
+    &:hover
+    {
+        transform: translateY(15px)
+    }
+}
+.button-container .nextButton
+{
+    transition : transform .3s ease-in-out;
+    &:hover
+    {
+        transform: translateY(-15px)
+    }
+}
+
+
+
+// .canvas-background
+// {
+//     position: absolute;
+//     display: block;
+//     background : transparent;
+//     left: 40vw;
+
+//     transform: perspective(800px) rotateX(40deg);
+// }
+
+
+// .redGradient{
+//     z-index: 1;
+//     position: absolute;    
+//     overflow: auto;
+//     opacity: .3;
+//     left: 40vw;
+//     top:0;
+//     width: 60vw;
+//     height: 100vh;
+//     transform: translateZ(-1000px);
+//     background: radial-gradient(circle at center bottom, rgb(255, 0, 0) 0%, #000000 80%);
+// }
+
+
+// .greenGradient{
+//     z-index: 1;
+//     position: absolute;
+//     top:0;
+//     left: 40vw;
+//     overflow: auto;    
+//     opacity: .3;
+//     width: 60vw;
+//     height: 100vh;
+//     transform: translateZ(-900px) translateY(-1000px);
+//     background: radial-gradient(circle at center bottom, rgba(0, 109, 86, 0.78) 0%, #000000 100%);
+// }
+
+.visor-container
+{
+    z-index: 7;
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    opacity: 0;
+    transform: translateX(600px) translateY(500px);
+}
+.visor-container .first-visor
+{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    border-radius: 100%;
+}
+
+.visor-container .second-visor
+{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    border-radius: 100%;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.line-container
+{
+    z-index: 7;
+    position: absolute;
+}
+.line
+{
+    z-index: 7;
+    position: absolute;
+    
+    background: white;
+}
+.line-1
+{
+
+    height: 3px;
+    width: 0px;
+    top: 570px;
+    left: 499px;
+    opacity: 0;
+}
+.line-2
+{
+    //500px
+    height: 0px;
+    width: 3px;
+    top: 180px;
+    left: 499px;
+    opacity: 0;
+}
+// .indications
+// {
+//     z-index: 8;
+//     position: absolute;
+//     width: 400px;
+//     height: 500px;
+//     top: 180px;
+//     left: 90px;
+//     opacity: 0;
+//     color: white;
+//     background: #111111
+// }
+
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100');
+
+// body, html{
+//   overflow: hidden;
+//   background: black;
+//   margin: 0;
+//   font-family: 'Montserrat';
+//   color:#ddd;
+// }
+
+h1{
+  line-height: 55px;
+  font-size: 55px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.place{
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  
+}
+
+.mainInformations{
+  margin: 30px 0 15px 0;
+/*  font-size: 15px;*/
+  font-size: 40px;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  color:rgb(104, 161, 209);
+}
+
+.mainInformations .title{
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+h2{
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  
+}
+
+.indications p{
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 22px;
+  font-family: 'Montserrat', sans-serif;
+  color :rgb(104, 161, 209);
+  
+}
+
+.shortLine{
+  width: 120px;
+  height: 1px;
+  margin-top: 10px;
+  background: rgba(235, 235, 235, .7);
+}
+
+img.media{
+  margin: 45px 0 5px 0;
+  width: 300px;
+  height: 300px;
+  padding: 0px;
+  text-align: center;
+  border: solid 1px #ddd;
+}
+
+h3{
+    margin: 40px 0 12px 0;
+    font-weight: bold;
+    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    
+}
+
+.cost{
+    width: 130px;
+}
+
+.cost .amount{
+    font-size: 20px;
+    color: white;
+}
+
+.causeOfFailure, .causeOfFailureSmartphone{
+    z-index: 1;
+    font-size: 100px;
+    font-weight: 500;
+    line-height: 100px;
+    text-align: center;
+    opacity: .2;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.causeOfFailureSmartphone{
+    font-weight: bold;
+    display: none;
+    font-size: 18px;
+    line-height: 18px;
+    padding-top: 10px;
+    opacity: 1;
+    text-align: left;
+}
+
+.container-info{
+    z-index : 7;
+    width: 100vw;
+    height: 100vh;
+}
+
+.button{ 
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 30px;
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+  background: rgba(255, 255, 255, .1);
+  font-weight: 400;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.indications{
+  margin-left: 15px;
+  font-size: 18px;
+  width: 400px;
+  height: 500px;
+  position: absolute;
+  top: 180px;
+  left: 80px;
+  color: #fefefe;
+  box-shadow: 0 0 100px black;
+  z-index: 2;
+  padding: 10px;
+  opacity: 0;
+  font-weight: 200;
+  overflow: auto;
+  padding-bottom: 80px;
+  cursor:s-resize;
+  padding-right: 25px;
+/*  border-right: solid 1px #ddd;*/
+}
+
+
+.darkGradient{
+  z-index: 2;
+  width: 350px;
+  height: 80px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to top, black 15%, rgba(0, 0, 0, 0) 100%);
+}
+
+/*GRID CSS*/
+.container-info{
+  display: grid;
+  grid-template-columns: 4fr 5fr 1fr;
+  grid-template-areas: "text quote ."
+}
+
+.causeOfFailure{
+  grid-area: quote;
+}
+
+.indications{
+  grid-area: text;
+}
+
+/*RESPONSIVE*/
+
+@media (max-width: 1270px){
+  .causeOfFailure{
+    font-size:70px;
+    line-height:70px;
+  } 
+  .container-info{
+    display: grid;
+    grid-template-columns: 4fr 5fr 1fr;
+    grid-template-areas: "text quote ."
+  }
+}
+
+@media (max-width: 1200px){
+  .container-info{
+    display: grid;
+    grid-template-columns: 9fr 11fr 1fr;
+    grid-template-areas: "text quote ."
+  }
+}
+
+@media (max-width: 900px){
+  .causeOfFailure{
+    font-size: 50px;
+    line-height: 50px;   
+  }
+  .container-info{
+    display: grid;
+    grid-template-columns: 12fr 10fr 1fr;
+    grid-template-areas: "text quote ."
+  }
+}
+
+@media (max-width: 750px){
+  .container-info{
+    display: grid;
+    grid-template-columns: 15fr 10fr 1fr;
+    grid-template-areas: "text quote ."
+  }
+}
+
+@media (max-width: 700px){
+  .causeOfFailure{
+    display: none;
+  }
+  .container-info{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "text"
+  }
+}
+
+@media (max-width: 350px){
+  .indications{
+    margin-left: 0px;
+    padding-right: 55px;
+  }
+  img.media{
+    width:250px;
+    height: auto;
+  }
+  h1{
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .mainInformations{
+    font-size: 25px;
+  }
+  .place{
+    font-size: 10px;
+  }
+}
