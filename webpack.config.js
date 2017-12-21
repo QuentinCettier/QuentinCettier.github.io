@@ -15,6 +15,7 @@ module.exports = {
     entry: {
         'vendor': './src/vendor.js',
         'app': './src/app.js',
+        'timeline': './src/timeline.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -75,9 +76,20 @@ module.exports = {
             },
             hash: true,
             filename: 'index.html',
-            template: './src/template/index.ejs'
+            excludeChunks: ['timeline'], 
+            template: './src/templates/index.ejs'
         }),
-        new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'timeline',
+            minify: {
+                collapseWhitespace: true
+            },
+            hash: true,
+            filename: 'timeline.html',
+            excludeChunks: ['app'],
+            template: './src/templates/timeline.ejs'
+        }),
+        new webpack.HotModuleReplacementPlugin(), 
         new webpack.NamedModulesPlugin(),
         // new webpack.optimize.CommonsChunkPlugin({
         //     name: 'common' 

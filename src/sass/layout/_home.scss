@@ -1,138 +1,306 @@
-.main-container
-{
-   position: absolute;
-   width: 50%;
-   height: 50%;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%,-60%);
-   font-family: 'Signika', sans-serif; 
+.home-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr 2fr 1fr 2fr;
+    grid-template-rows: 1fr 0.5fr auto 1fr 1fr;
+    grid-template-areas: "name name . . redirect redirect" ". . . . . ." ". quote quote quote quote ." "button button button button button button" ". . scroll scroll code code";
+    color: $grey;
+    font-family: 'Signika', sans-serif;
+    perspective: 800px;
+    @media screen and (max-width: 600px) {
+        grid-template-columns: 2fr 1fr 2fr 2fr 1fr 2fr;
+        grid-template-rows: 0.9fr 0.4fr auto 1.3fr 0.5fr 1fr;
+        grid-template-areas: ". name name name name . " "code code code code code code" "quote quote quote quote quote quote" "button button button button button button" "redirect redirect redirect redirect redirect redirect" ". . scroll scroll . .";
+        .quote-container {
+            p {
+                padding: 2rem 2rem;
+            }
+        }
+    }
+    .website-name-container {
+        grid-area: name;
+        .website-name {
+            display: flex;
+            align-items: center;
+            justify-content: center; // padding: 1rem 0rem;
+            img {
+                width: 50%;
+            }
+        }
+        opacity: 0;
+        transform: translateY(1rem);
+        animation: fade-in 0.5s ease forwards;
+    }
+    .redirect-container {
+        grid-area: redirect;
+        .redirect {
+            position: relative;
+            padding: 1rem 0rem;
+            opacity: 0.5;
+            transition: 0.2s opacity ease;
+            &:before {
+                content: "";
+                position: absolute;
+                right: 110%;
+                top: 38%;
+                width: 2px;
+                height: 28%;
+                background: $green;
+                transform: scale(0);
+                transform-origin: 0 0;
+                transition: 0.2s transform ease;
+            }
+            &:after {
+                content: "";
+                position: absolute;
+                left: 110%;
+                top: 38%;
+                width: 2px;
+                height: 28%;
+                background: $green;
+                transform: scale(0);
+                transform-origin: 0 100%;
+                transition: 0.3s transform ease-in-out;
+            }
+            &:hover {
+                opacity: 1;
+                &:before {
+                    transform: scale(1);
+                }
+                &:after {
+                    transform: scale(1);
+                }
+            }
+        }
+        opacity: 0;
+        transform: translateY(1rem);
+        animation: fade-in 0.5s ease forwards;
+    }
+    .quote-container {
+        grid-area: quote;
+        text-align: center;
+        transition: 0.5s all ease-out;
+        will-change: transform;
+        &:hover {
+            color: $grey;
+        }
+        p {
+            width: 100%;
+            font-size: 2rem;
+        }
+        .quote-name {
+            padding: 2rem;
+            opacity: 0.5;
+            span {
+                color: $green;
+            }
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(1rem);
+            animation: fade-in 2s ease forwards;
+        }
+    }
+    .button-container {
+        grid-area: button; // transform-style: preserve-3d;
+        opacity: 0;
+        transform: translateY(2px);
+        animation: fade-in 2s ease forwards 0.5s;
+        .button-home {
+            position: relative;
+            padding: 1rem 0rem;
+            transition: opacity 0.2s ease;
+            will-change: opacity;
+            font-size: 1.2rem;
+            transition: 0.5s all ease-out;
+            will-change: transform;
+            text-transform: uppercase;
+            &:hover {
+                opacity: 0.6;
+                &:before {
+                    transform: scale(0)
+                }
+                &:after {
+                    transform: scale(0)
+                }
+            }
+            &:before {
+                content: "";
+                position: absolute;
+                bottom: 100%;
+                width: 100%;
+                height: 2px;
+                transform-origin: 0 50%;
+                background: $green;
+                transition: 0.5s all ease-out;
+                will-change: transform;
+            }
+            &:after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                width: 100%;
+                height: 2px;
+                transform-origin: 100% 50%;
+                background: $green;
+                transition: 0.5s all ease-out;
+                will-change: transform;
+            }
+        }
+    }
+    .invite-scroll {
+        grid-area: scroll;
+        font-size: 0.7rem;
+        .scroll-container {
+            position: relative;
+            width: 15%;
+            height: 50%;
+            transform: translateY(15px);
+            transition: 0.5s all ease-out;
+            will-change: transform;
+            .scroll-text {
+                position: absolute;
+                left: 50%;
+                color: $grey2;
+                transform: translate(-50%, 0);
+                transition: 0.5s all ease;
+            }
+            .scroll-line {
+                position: absolute;
+                width: 1px;
+                height: 90%;
+                left: 50%;
+                top: 1.5rem;
+                background: $grey2;
+                transition: 0.5s all ease 0.1s;
+            }
+            &:hover {
+                .scroll-text {
+                    color: $grey;
+                    transform: translate(-50%, 6px);
+                }
+                .scroll-line {
+                    background: $green;
+                    transform: translateY(6px);
+                }
+            }
+        }
+    }
+    .github {
+        grid-area: code;
+        font-size: 0.9rem;
+        z-index: 1;
+        .github-text {
+            position: relative;
+            opacity: 0.5;
+            padding: 1rem 0rem;
+            transition: 0.2s opacity ease;
+            &:before {
+                content: "";
+                position: absolute;
+                right: 110%;
+                top: 38%;
+                width: 2px;
+                height: 28%;
+                background: $green;
+                transform: scale(0);
+                transform-origin: 0 0;
+                transition: 0.2s transform ease;
+            }
+            &:hover {
+                opacity: 1;
+                &:before {
+                    transform: scale(1);
+                }
+            }
+        }
+        .fa-github {
+            margin: 0px 5px;
+            color: $green;
+        }
+        opacity: 0;
+        transform: translateY(1rem);
+        animation: fade-in 0.5s ease forwards;
+    }
 }
 
-.main-container .quote-container
-{
-   position: absolute;
-   width: 0px;
-   height: 30px;
-   top: 50%;
-   left: 50%;
-   transform: translate(-45%,-150%);
-   overflow: hidden;
+
+@keyframes fade-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fade-in-color {
+    to {
+        color: $grey;
+    }
 }
 
-.quote-container.quote-2
-{
-   transform: translate(-45%,-50%);
- 
+.letter {
+    transition: color 0.1s ease-out;
+    opacity: 0;
+    color: $green;
+    will-change: opacity;
+    &:hover {
+        color: $green;
+    }
 }
-.quote-container.quote-3
-{
-   transform: translate(-45%, 50%);
-  
-}
-.quote-container .quote
-{
-   position: absolute;
-   font-size: 30px;
-   color: #dbdcdc;
-   text-align: center;
-}
-
-.main-container .button-container
-{
-   position: absolute;
-   width: 500px;
-   height: 50px;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%,200%);
-   text-align: center;
-   overflow: hidden;
-}
-.button-container .discover-button
-{
-   position: absolute;
-   width: 50%;
-   height: 100%;
-   left: 50%;
-   transform: translate(-50%,0%);
-   border : 1px solid #dbdcdc;
-}
-
-// .button-container .discover-button::before
-// {
-//     content: '';
-//     position: absolute;
-//     top: 0px;
-//     left:10px;
-//     width: 30px;
-//     height: 4px;
-//     background : #dbdcdc;
-//     transition-duration: .3s;
-  
+// .node-1 {
+//     position: relative;
+//     width: 3px; 
+//     height: 3px; 
+//     border-radius: 100%; 
+//     background: #fefefe;
+//     span {
+//         position: absolute;
+//         transform: rotate(270deg) translate(100%, -90%);
+//     }
 // }
-.discover-button .text-button
-{
-   color: #dbdcdc;
-   position: absolute;
-   top:50%;
-   left: 50%;
-   transform: translate(-50%,-50%);
-   font-family: 'Bungee Hairline', cursive;
-}
-
-.button-container .discover-button:hover
-{
-   cursor: pointer;
-   // &::before
-   // {
-   //     transform: translateX(30px) scaleX(2);
-   // }
-}
-
-.link-container
-{
-   font-family: 'Signika', sans-serif;
-   position: absolute;
-   top: 3%;
-   right: 2%;
-   overflow: hidden;
-   &>.link
-   {
-       cursor: pointer;
-       color : #dbdcdc;
-       &::before
-       {
-           content: "";
-           width: 100px;
-           height: 2px;
-           background :#dbdcdc;
-           position: absolute;
-           top:15px;
-           animation: AboutLinkAnimation 3s infinite;
-          
-       }
-   }
-}
-
-.copyright-container
-{
-   font-family: 'Signika', sans-serif;   
-   position: absolute;
-   top: 96%;
-   right: 2%;
-   overflow: hidden;
-   &>.copyright
-   {
-       font-size: 10px;
-       color :#dbdcdc;
-   }
-}
-
-@keyframes AboutLinkAnimation
-{
-   0%{transform: translateX(0px)}
-   25%{transform: translateX(100px)}
-   75%{transform: translateX(-100px)}
-   100%{transform: translateX(0px)}
-}
+// .button-cube {
+//     transform-style: preserve-3d;
+//     position: relative;
+//     margin-top: -60px; 
+//     margin-left: -150px; 
+//     transform-origin: 60px 30px -30px; 
+//     transform: rotateX(25deg) translateZ(-30px);
+//     transition: 0.5s transform ease-out;
+//     will-change: transform;
+//     .button-home {
+//         position: absolute;
+//         background: #1f1d1d; 
+//         border: 1px solid #fefefe;
+//         transition: 0.2s border ease; 
+//     }
+//     .front {
+//         width: 150px;
+//         height: 60px;
+//         transform: translateZ(30px);
+//     }
+//     .back {
+//         width: 150px;
+//         height: 60px;
+//         transform: translateZ(-30px) rotateX(180deg);
+//     }
+//     .top {
+//         width: 150px;
+//         height: 60px; 
+//         transform: translateY(-30px) rotateX(90deg);
+//     }
+//     .bottom {
+//         width: 150px; 
+//         height: 60px;
+//         transform: translateY(30px) rotateX(270deg);
+//     }
+//     &:hover {
+//         .button-home {
+//             border: 1px solid $green; 
+//         }
+//     }
+// .right {
+//     position: absolute;
+//     transform: translateX(50%) rotateY(90deg) translateZ(50%);
+// }
