@@ -10,6 +10,19 @@ body
     overflow: hidden;
     background: #343434;
 }
+.logo-container
+{
+    position: absolute;
+    top: 5%;
+    left :5%;
+    width: 180px;
+    height: 50px;
+    &>.website-name>img
+    {
+      width: 100%;
+      height: 100%;
+    }
+}
 
 .super-container
 {
@@ -28,7 +41,7 @@ body
     left: 50%;
     transform-style: preserve-3d;
     transform :rotateX(50deg) translateY(-380px);
-    transition: transform 2s ease-in-out;
+    transition: transform 3s ease-in-out;
 }
 
 .container .plan
@@ -157,8 +170,8 @@ body
     position: absolute;
     width: 150px;
     height: 150px;
-    border-left: 2px solid white;
-    border-right: 2px solid white;
+    border-left: 3px solid white;
+    border-right: 3px solid white;
     border-radius: 100%;
 }
 
@@ -167,8 +180,8 @@ body
     position: absolute;
     width: 100px;
     height: 100px;
-    border-top: 2px solid white;
-    border-bottom: 2px solid white;
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
     border-radius: 100%;
     top: 50%;
     left:50%;
@@ -251,7 +264,7 @@ h1{
   font-size: 40px;
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
-  color:rgb(104, 161, 209);
+  color: $grey2;
 }
 
 .mainInformations .title{
@@ -270,7 +283,7 @@ h2{
   font-size: 15px;
   line-height: 22px;
   font-family: 'Montserrat', sans-serif;
-  color :rgb(104, 161, 209);
+  color :$grey2;
   
 }
 
@@ -278,7 +291,7 @@ h2{
   width: 120px;
   height: 1px;
   margin-top: 10px;
-  background: rgba(235, 235, 235, .7);
+  background: $grey2;
 }
 
 img.media{
@@ -295,6 +308,7 @@ h3{
     font-weight: bold;
     font-size: 25px;
     font-family: 'Montserrat', sans-serif;
+
     
 }
 
@@ -359,8 +373,8 @@ h3{
   position: absolute;
   top: 180px;
   left: 80px;
-  color: #fefefe;
   box-shadow: 0 0 100px black;
+  background : rgba(52, 52, 52, 0.71);
   z-index: 2;
   padding: 10px;
   opacity: 0;
@@ -369,6 +383,7 @@ h3{
   padding-bottom: 80px;
   cursor:s-resize;
   padding-right: 25px;
+  color:black;
 /*  border-right: solid 1px #ddd;*/
 }
 
@@ -471,3 +486,71 @@ h3{
     font-size: 10px;
   }
 }
+
+//Loader
+.loader-container
+{
+  opacity: 0;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+
+}
+.loader_ellipse
+{
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
+
+.loader_ellipse
+{
+    animation-name: ellipse;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-direction: reverse;
+}
+
+@keyframes ellipse 
+{
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+// .loader_rocket
+// {
+//     width: 120px;
+//     height: 120px;
+//     position: absolute;
+//     top: 38%;
+//     left: 38%;
+//     z-index: 10;
+// }
+
+// .loader_rocket
+// {
+//     transform-origin: 100% 100%;
+//     animation-name: rocket;
+//     animation-duration: 2.5s;
+//     animation-iteration-count: infinite;
+// }
+
+// @keyframes rocket 
+// {
+//     0% {
+//         transform: rotate(0deg);
+//     }
+//     100% {
+//         transform: rotate(360deg);
+//     }
+// }
