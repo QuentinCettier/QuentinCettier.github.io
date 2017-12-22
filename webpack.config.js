@@ -29,8 +29,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'scripts/[name].bundle.js',
-        publicPath: '/'
+        filename: 'scripts/[name].bundle.js'
     },
     module: {
         rules: [{
@@ -48,10 +47,6 @@ module.exports = {
                     'file-loader?name=images/[name].[ext]',
                     'image-webpack-loader'
                 ]
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf)$/,
-                loader: 'url-loader?limit=100000'
             },
             {
                 test: /\.mp3?/,

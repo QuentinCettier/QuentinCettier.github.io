@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Welcome to a new SpaceX world. Discover the successes and failures of rocket launch and learn more about SpaceX company !">
     <link rel="apple-touch-icon" sizes="114*114" href="<%= require('../icons/apple-touch-icon.png') %>">
@@ -32,11 +32,11 @@
     <div class="home-grid">
         <div class="website-name-container center-children">
             <a href="index.html" class="website-name" data-link="true">
-                <img src=<%=require( "../images/logo.png") %> alt="Space X Logo">
+                <img src=<%= require( "../images/logo.png") %> alt="Space X Logo">
             </a>
         </div>
         <div class="redirect-container center-children">
-            <a href="http://www.spacex.com/" class="redirect" target="blank" data-link="true">visit spaceX.com</a>
+            <a href="http://www.spacex.com/" class="redirect" target="blank" data-link="true" title="www.spacex.com">visit spaceX.com</a>
         </div>
         <div class="quote-container" data-link="true" data-parallax="true">
             <p class="quote">
@@ -68,22 +68,13 @@
             </div>
         </div>
         <div class="github center-children">
-            <a href="https://github.com/QuentinCettier/QuentinCettier.github.io" class="github-text" data-link="true">view code on github
+            <a href="https://github.com/QuentinCettier/spacexmoments" class="github-text" data-link="true">view code on github
                 <span class="fab fa-github"></span>
             </a>
         </div>
     </div>
-    <audio class="theme" src=<%=require( '../sounds/theme.mp3') %> autoplay loop>
+    <audio class="theme" src=<%= require( '../sounds/theme.mp3') %> autoplay loop>
         <!-- interstellar theme music -->
     </audio>
 </body>
-
 </html>
-
-
-<!-- <div class="button-cube">
-                <span class="button-home front center-children" data-link="true">Space X Story</span>
-                <span class="button-home top center-children" data-link="true">Space X Story</span>
-                <span class="button-home back center-children" data-link="true">Space X Story</span>
-                <span class="button-home bottom center-children" data-link="true">Space X Story</span>
-            </div> -->

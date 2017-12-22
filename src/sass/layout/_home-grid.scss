@@ -14,7 +14,7 @@
         //css grid of 6 columns and 6 rows - display for small devices        
         grid-template-columns: 2fr 1fr 2fr 2fr 1fr 2fr;
         grid-template-rows: 0.9fr 0.4fr auto 1.3fr 0.5fr 1fr;
-        grid-template-areas: ". name name name name . " "code code code code code code" "quote quote quote quote quote quote" "button button button button button button" "redirect redirect redirect redirect redirect redirect" ". . scroll scroll . .";
+        grid-template-areas: ". name name name name . " "code code code code code code" "quote quote quote quote quote quote" "button button button button button button" "redirect redirect redirect redirect redirect redirect" ". . scroll scroll equalizer equalizer";
         .quote-container {
             p {
                 padding: 2rem 2rem;
@@ -30,6 +30,11 @@
             justify-content: center;
             img {
                 width: 50%;
+                transition: 0.2s opacity ease; 
+                will-change: opacity; 
+                &:hover {
+                    opacity: 0.5; 
+                }
             }
         }
         opacity: 0;

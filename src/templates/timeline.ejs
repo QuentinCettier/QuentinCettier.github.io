@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="apple-touch-icon" sizes="114*114" href="<%= require('../icons/apple-touch-icon.png') %>">
     <link rel="icon" type="image/png" sizes="32x32" href="<%= require('../icons/favicon-32x32.png') %>">
@@ -26,15 +26,15 @@
     <div class="cursor"></div>
     <div class="cursor-circle"></div>
     <!-- Logo -->
-    <div class="logo-container">
+    <div class="logo-container" data-link="true">
         <a href="index.html" class="website-name" data-link="true">
-            <img src=<%=require( "../images/logo.png") %> alt="Space X Logo">
+            <img data-link="true" src=<%=require( "../images/logo.png") %> alt="Space X Logo">
         </a>
     </div>
     <div class="super-container">
         <div class="button-container">
-            <img class="nextButton bcg" src=<%= require('../images/up.png')%> alt="up">
-            <img class="previousButton bcg" src=<%= require('../images/down.png')%> alt="up">
+            <img class="nextButton bcg" src=<%= require('../images/up.png')%> alt="up" data-link="true">
+            <img class="previousButton bcg" src=<%= require('../images/down.png')%> alt="up" data-link="true">
         </div>
         <div class="visor-container">
             <div class="first-visor"></div>
@@ -77,12 +77,19 @@
             <img data-parallax ="true" class="plan index-5 bcg" src=<%= require('../images/star-plans-index.png')%>  alt="Test">               
         </div>
         <div class="github">
-            <a href="#" class="github-text" data-link="true">view code on github
+            <a data-link="true" href="https://github.com/QuentinCettier/spacexmoments" class="github-text">view code on github
                 <span class="fab fa-github"></span>
             </a>
         </div>
     </div>
-    <audio class="theme" src=<%=require( '../sounds/theme.mp3') %> autoplay loop>
+    <div class="equalizer-container center-children">
+            <span class="equalizer-bar equalizer-bar-1 animation"></span>
+            <span class="equalizer-bar equalizer-bar-2 animation"></span>
+            <span class="equalizer-bar equalizer-bar-3 animation"></span>
+            <span class="equalizer-bar equalizer-bar-4 animation"></span>
+            <span class="equalizer-bar equalizer-bar-5 animation"></span>
+        </div>
+    <audio class="theme" src=<%= require( '../sounds/theme.mp3') %> autoplay loop>
         <!-- interstellar theme music -->
     </audio>
 </body>

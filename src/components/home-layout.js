@@ -202,7 +202,7 @@ const animate = () => {
             y: randomNumber(-50, -100),
             vx: randomNumber(-3, -1),
             vy: randomNumber(1, 3),
-            radius: randomNumber(1.4, 1.9)
+            radius: randomNumber(1, 1.2)
         }
         const star = new FallingStar(random.x, random.y, -1, 1, random.radius)
         fallingstars.push(star)
