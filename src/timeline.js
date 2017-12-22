@@ -6,6 +6,7 @@ import './components/timeline-layout.js'
 
 import {TweenMax, Power2, TimelineLite} from "gsap";
 
+//DOM element that we use in JS
 const $container = document.querySelector('.container')
 const $nextButton = document.querySelector('.nextButton')
 const $previousButton = document.querySelector('.previousButton')
@@ -19,8 +20,11 @@ const $plan2 = $container.querySelector('.index-2')
 const $plan3 = $container.querySelector('.index-3')
 const $plan4 = $container.querySelector('.index-4')
 const $plan5 = $container.querySelector('.index-5')
-const $parallaxArray = Array.from(document.querySelectorAll('[data-parallax]'))
+const $github = document.querySelector('.github')
+const $logo = document.querySelector('.logo-container')
+// const $parallaxArray = Array.from(document.querySelectorAll('[data-parallax]'))
 //Variables to display data
+const $loaderImage = document.querySelector('.loader-container')
 const $indications = document.querySelector('.indications')
 const $date = $indications.querySelector('.date')
 const $mainInfo = $indications.querySelector('.mainInformations')
@@ -34,10 +38,15 @@ const $consequences = $indications.querySelector('.consequences')
 const $textConsequences = $indications.querySelector('.textConsequences')
 const $media = $indications.querySelector('.media')
 
-const image = require('./images/2006_03_24.jpg')
+// const image = require('./images/2006_03_24.jpg')
 
+//Color const
 const green = '#006d56'
-const red = '#841919'
+const red = 'rgb(120,8,13)'
+const grey = '#918b8b'
+const black = '#000'
+
+//JSON containing all the datas we need to display
 const dataArray = 
 [
   {
@@ -49,7 +58,7 @@ const dataArray =
     'reason' : 'The first stage having exploded as a result of a fuel leak.',
     'consequence' : 'Space X initially attributed the fire to an improperly tightened fuel-line nut. A later review by DARPA found that the nut was properly tightened, since its locking wire was still in place, but had failed because of corrosion from saltwater spray.',
     'details': 'The vehicle had a noticeable rolling motion after liftoff, as shown on the launch video rocking back and forth a bit. Impact onto dead reef about 250 feet from the launch site.',
-    'media': `${image}`,
+    // 'media': `${image}`,
   },
   {
     'date' : 'March 21 2007',
@@ -100,19 +109,35 @@ const dataArray =
 
 let lastDeltaY = 0
 let lastTime = 0
+//currentSlide let
+let currentSlide = 0
 
+//Scroll Hijack 
+//We use it to trigger scroll event once
 document.addEventListener(
   "wheel", 
   (e) => {
 	const time = Date.now()
     //1e condition : oblige un delatY supérieur à celui du dernier événement wheel en valeur absolue pour ignorer tous les wheel déclenchés avec l'élan du trackpad, car dès qu'on relâche le pad, le deltaY diminue. 
     //2e condition : vrai si le délais depuis la dernière modificiation > 600
-	if (Math.abs(e.deltaY) > Math.abs(lastDeltaY) && time > lastTime + 600) { 
-      (e.deltaY > 0 ? $nextButton.click() : $previousButton.click())
-      lastTime = time 
-  }
+    if(e.clientX > 500 & $indications.style.opacity == 1)
+    {
+        if (Math.abs(e.deltaY) > Math.abs(lastDeltaY) && time > lastTime + 1600) { 
+            (e.deltaY > 0 ? $nextButton.click() : $previousButton.click())
+            lastTime = time 
+        }
+    }   
+        else if($indications.style.opacity == 0)
+    {
+        if (Math.abs(e.deltaY) > Math.abs(lastDeltaY) && time > lastTime + 1600) { 
+            (e.deltaY > 0 ? $nextButton.click() : $previousButton.click())
+            lastTime = time 
+        }
+    }
   lastDeltaY = e.deltaY
+   
 })
+//Coordinates for 13" screens
 const coordinates = 
 [ 
     { x: 0 , y: -380},
@@ -121,16 +146,24 @@ const coordinates =
     { x: 400, y:865},
     { x:35, y:1290}
 ]
+//initialize the scene, fire some animations using GSAP
 const init = () =>
 {
     fadeOutInfo()
     let tlInit = new TimelineLite()
     tlInit
         .to($visor, .5, {autoAlpha: 1} , '+=3')
+        .to($github, .3, {autoAlpha: 1})
+        .to($logo, .3, {autoAlpha:1}, '-=.3')
         .to($visor1, 2, {rotation:360})
-        .to($visor2, 2, {rotation: -360}, '-=2');
-        
+        .to($visor2, 2, {rotation: -360}, '-=2')
+        .to($line2, .5, {autoAlpha: 1, height : 500, ease: Power1.easeIn})
+        .to($line1, .2, {autoAlpha:1, width: 100, ease: Power1.easeIn}, '-=.3')
+        .fromTo($indications, .3, {y: 100 , autoAlpha: 0},{y: 0, autoAlpha:1 ,ease: Power1.easeIn})
+    loadSlide(currentSlide)
 }
+
+//Parallax on mouse mouve event
 const offset = [{x:0 ,y : 0}]
 document.addEventListener('mousemove', (e) =>
 {
@@ -144,28 +177,18 @@ document.addEventListener('mousemove', (e) =>
     $plan5.style.transform = `translateX(${offset.x}px) translateY(${-1500 + offset.y}px) translateZ(-600px)`
 })
 
-// $visor.addEventListener('mousedown', () =>
-// {
-//     let tlRotateVisor = new TimelineLite()
-//     tlRotateVisor
-//         .to($visor1, 2, {rotation:360})
-//         .to($visor2, 2, {rotation: -360}, '-=2')
-// })
-
+//$visor click eventListener
 $visor.addEventListener('click', () =>
 {
     let tlAnimateIn = new TimelineLite()
     tlAnimateIn
-        .to($line2, .5, {autoAlpha:1, height : 500})
-        .to($line1, .3, {autoAlpha:1, width : 100}, '-=.2')
-        .to($indications, .3, {autoAlpha:1})
-    
-    loadSlide(currentSlide)
+        .to($line2, .5, {autoAlpha: 1, height : 500, ease: Power1.easeIn}, '-=.2')
+        .to($line1, .2, {autoAlpha:1, width: 100, ease: Power1.easeIn})
+        .fromTo($indications, .3, {y: 100 , autoAlpha: 0},{y: 0, autoAlpha:1 ,ease: Power1.easeIn})
 })
-let currentSlide = 0
 
-
-$nextButton.addEventListener('mousedown', () =>
+//$next Button cick event Listener
+$nextButton.addEventListener('click', () =>
 {
     $visor1.style.borderColor =  '#ffffff'
     $visor2.style.borderColor =  '#ffffff'
@@ -174,10 +197,17 @@ $nextButton.addEventListener('mousedown', () =>
         animateOut(currentSlide)
         currentSlide++
         $container.style.transform = `rotateX(50deg) translateY(${coordinates[currentSlide].y}px) translateX(${coordinates[currentSlide].x}px)`
+        //Waiting for the transition to end before fire others functions
+        $container.addEventListener('transitionend', () =>
+        {
+            loadSlide(currentSlide)
+            $visor.click()
+        })
     }
 })
 
-$previousButton.addEventListener('mousedown', () =>
+//$previousButton event Listener
+$previousButton.addEventListener('click', () =>
 {
     $visor1.style.borderColor =  '#ffffff'
     $visor2.style.borderColor =  '#ffffff'
@@ -186,24 +216,24 @@ $previousButton.addEventListener('mousedown', () =>
         animateOut(currentSlide)
         currentSlide--
         $container.style.transform = `rotateX(50deg) translateY(${coordinates[currentSlide].y}px) translateX(${coordinates[currentSlide].x}px)`
+        loadSlide(currentSlide)
     }
     
 })
 
+//Animations Datas container out
 const animateOut = (currentSlide) =>
 {
-    fadeOutInfo()
     let tlAnimateSlideOut = new TimelineLite()
     tlAnimateSlideOut
-        .to($indications, .3, {autoAlpha:0})
-        .to($line1, .2, {autoAlpha:0, width : 0})
-        .to($line2, .5, {autoAlpha:0, height : 0}, '-=.3')
-        
+        .to($indications, .3, {y: 50, autoAlpha:0 ,ease: Power1.easeOut})
+        .to($line1, .2, {autoAlpha:0, width: 0 ,ease: Power1.easeOut})
+        .to($line2, .5, {autoAlpha: 0, height : 0, ease: Power1.easeOut}, '-=.3')
+    fadeOutInfo()
 }
-
+//Fill HTML with JSON 's array values
 const loadSlide = (currentSlide) =>
 {
-
     $details.innerHTML = "Details"
     $consequences.innerHTML = "Consequences"
     $date.innerHTML = dataArray[currentSlide].date
@@ -213,16 +243,24 @@ const loadSlide = (currentSlide) =>
     $textConsequences.innerHTML = dataArray[currentSlide].consequence
     $textDetails.innerHTML = dataArray[currentSlide].details
     $media.src = dataArray[currentSlide].media
-
+    //If success is false
     if(dataArray[currentSlide].success == 'false')
     {
-        $line1.style.background =  red
-        $line2.style.background =  red
-        $visor1.style.borderColor = red  
-        $visor2.style.borderColor = red  
-    }
+        $date.style.color = black
+        $place.style.color = black
+        $details.style.color = black
+        $consequences.style.color = black
+        $line1.style.background =  black
+        $line2.style.background =  black
+        $visor1.style.borderColor = black  
+        $visor2.style.borderColor = black 
+    }//If success is false
     else if(dataArray[currentSlide].success == 'true')
     {
+        $date.style.color = green
+        $place.style.color = green
+        $details.style.color = green
+        $consequences.style.color = green
         $line1.style.background =  green
         $line2.style.background =  green
         $visor1.style.borderColor =  green
@@ -230,6 +268,7 @@ const loadSlide = (currentSlide) =>
     }
 }
 
+//Animations Datas out
 const fadeOutInfo = () =>
 {
     $date.innerHTML = ""
@@ -242,7 +281,7 @@ const fadeOutInfo = () =>
     $consequences.innerHTML = ""
     $media.src = ""
 }
-
+//Keyboard event Listener
 document.addEventListener('keydown', (e) =>
 {
 
@@ -259,4 +298,15 @@ document.addEventListener('keydown', (e) =>
             break  
     }
 })
+
+//Indications container mouseMove 3D event
+let delta = [{x : 0, y: 0}] 
+$indications.addEventListener('mouseover', (e) =>
+{
+    delta.x = window.innerWidth / e.clientX/ 8
+    delta.y = window.innerHeight / e.clientY * 2
+    
+    $indications.style.transform = `perspective(800px) rotateX(${delta.x}deg) rotateY(${delta.y}deg)`
+})
+
 init()

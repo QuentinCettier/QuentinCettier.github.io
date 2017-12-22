@@ -17,37 +17,48 @@
 </head>
 
 <body>
+
+    <!-- <div class="loader-container">
+        <img class="loader_ellipse bcg" src=<%= require('../images/ellipse.png')%> alt="elipse">
+        <img class="loader_rocket bcg" src=<%= require('../images/rocket.png')%> alt="rocket">
+    </div> -->
+    <!-- cursor -->
     <div class="cursor"></div>
     <div class="cursor-circle"></div>
+    <!-- Logo -->
+    <div class="logo-container">
+        <a href="index.html" class="website-name" data-link="true">
+            <img src=<%=require( "../images/logo.png") %> alt="Space X Logo">
+        </a>
+    </div>
     <div class="super-container">
-        <!-- <img src="<%= require('../images/logo.png') %>" alt="Space X Moments Logo" data-link="true"> -->
         <div class="button-container">
-            <img class="nextButton" src=<%=r equire( '../images/up.png')%> alt="up">
-            <img class="previousButton" src=<%=r equire( '../images/down.png')%> alt="up">
+            <img class="nextButton bcg" src=<%= require('../images/up.png')%> alt="up">
+            <img class="previousButton bcg" src=<%= require('../images/down.png')%> alt="up">
         </div>
         <div class="visor-container">
             <div class="first-visor"></div>
             <div class="second-visor"></div>
         </div>
+        <!-- Lines used to link visor and informations -->
         <div class="line-container">
             <div class="line line-1"></div>
             <div class="line line-2"></div>
-            <div class="line line-3"></div>
-            <div class="line line-4"></div>
         </div>
+        <!-- Informations that will be displayed -->
         <div class="container-info">
             <div class="indications">
                 <h1 class="date"></h1>
                 <div class="place"></div>
                 <div class="shortLine"></div>
                 <h2 class="mainInformations">
-                    <div class="rocket"></div>
-                    <div class="title">Rocket's name</div>
-                    <div class="cost"></div>
-                    <div class="title">Cost of the takeoff test</div>
+                <div class="rocket"></div>
+                <div class="title">Rocket's name</div>
+                <div class="cost"></div>
+                <div class="title">Cost of the takeoff test</div>
                 </h2>
                 <p class="causeOfFailureSmartphone"></p>
-                <img class="media" src="" alt="rocket takeoff" />
+                <img class="media bcg" src="" alt="rocket takeoff" />
                 <h3 class="details">Details</h3>
                 <p class="textDetails">
                 </p>
@@ -57,30 +68,23 @@
             </div>
             <p class="causeOfFailure"></p>
         </div>
-        <!-- <canvas class="canvas-background"></canvas> -->
+        <!-- 3D Container -->
         <div class="container">
-            <img data-parallax="true" class="plan index-1" src=<%=r equire( '../images/points.png')%> alt="Test">
-            <img data-parallax="true" class="plan index-2" src=<%=r equire( '../images/star-plans-index.png')%> alt="Test">
-            <img data-parallax="true" class="plan index-3" src=<%=r equire( '../images/star-plans-index.png')%> alt="Test">
-            <img data-parallax="true" class="plan index-4" src=<%=r equire( '../images/star-plans-index.png')%> alt="Test">
-            <img data-parallax="true" class="plan index-5" src=<%=r equire( '../images/star-plans-index.png')%> alt="Test">
-            <!-- <img class="plan index-6" src=<%= require('../images/points.png')%>  alt="Test"> -->
-            <!-- <div class="plan greenGradient"></div> -->
-            <!-- <div class="redGradient"></div> -->
-            <!-- <div class="container-block-data"></div> -->
+            <img data-parallax ="true" class="plan index-1 bcg" src=<%= require('../images/points.png')%>  alt="Test">
+            <img data-parallax ="true" class="plan index-2 bcg" src=<%= require('../images/star-plans-index.png')%>  alt="Test">
+            <img data-parallax ="true" class="plan index-3 bcg" src=<%= require('../images/star-plans-index.png')%>  alt="Test">
+            <img data-parallax ="true" class="plan index-4 bcg" src=<%= require('../images/star-plans-index.png')%>  alt="Test">
+            <img data-parallax ="true" class="plan index-5 bcg" src=<%= require('../images/star-plans-index.png')%>  alt="Test">               
         </div>
-        <!-- <canvas class="canvas-background canvas-1"></canvas> -->
-    </div>
-    <!-- <div class="equalizer center-children">
-        <div class="equalizer-container center-children" data-link="true">
-            <span class="equalizer-bar equalizer-bar-1 animation"></span>
-            <span class="equalizer-bar equalizer-bar-2 animation"></span>
-            <span class="equalizer-bar equalizer-bar-3 animation"></span>
-            <span class="equalizer-bar equalizer-bar-4 animation"></span>
-            <span class="equalizer-bar equalizer-bar-5 animation"></span>
+        <div class="github">
+            <a href="#" class="github-text" data-link="true">view code on github
+                <span class="fab fa-github"></span>
+            </a>
         </div>
     </div>
-    <audio class="theme" src=<%=require( '../sounds/theme.mp3') %> autoplay loop></audio> -->
+    <audio class="theme" src=<%=require( '../sounds/theme.mp3') %> autoplay loop>
+        <!-- interstellar theme music -->
+    </audio>
 </body>
 
 </html>
