@@ -18,7 +18,9 @@ const $plan2 = $container.querySelector('.index-2')
 const $plan3 = $container.querySelector('.index-3')
 const $plan4 = $container.querySelector('.index-4')
 const $plan5 = $container.querySelector('.index-5')
-const $parallaxArray = Array.from(document.querySelectorAll('[data-parallax]'))
+const $github = document.querySelector('.github')
+const $logo = document.querySelector('.logo-container')
+// const $parallaxArray = Array.from(document.querySelectorAll('[data-parallax]'))
 //Variables to display data
 const $loaderImage = document.querySelector('.loader-container')
 const $indications = document.querySelector('.indications')
@@ -147,6 +149,8 @@ const init = () =>
     let tlInit = new TimelineLite()
     tlInit
         .to($visor, .5, {autoAlpha: 1} , '+=3')
+        .to($github, .3, {autoAlpha: 1})
+        .to($logo, .3, {autoAlpha:1}, '-=.3')
         .to($visor1, 2, {rotation:360})
         .to($visor2, 2, {rotation: -360}, '-=2')
         .to($line2, .5, {autoAlpha: 1, height : 500, ease: Power1.easeIn})
@@ -296,11 +300,12 @@ document.addEventListener('keydown', (e) =>
 
 //Indications container mouseMove 3D event
 let delta = [{x : 0, y: 0}] 
-$indications.addEventListener('mouseover', (e)=>
+$indications.addEventListener('mouseover', (e) =>
 {
     delta.x = window.innerWidth / e.clientX/ 8
     delta.y = window.innerHeight / e.clientY * 2
     
-    $indications.style.transform = `rotateX(${delta.x}deg) rotateY(${delta.y}deg)`
+    $indications.style.transform = `perspective(800px) rotateX(${delta.x}deg) rotateY(${delta.y}deg)`
 })
+
 init()
