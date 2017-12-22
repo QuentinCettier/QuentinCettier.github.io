@@ -23,6 +23,8 @@ a {
     background: #141414;
 }
 
+//cursors are initially set at the top left corner of the screen 
+//will move with css transform 
 .cursor {
     position: absolute;
     top: -3px;
@@ -47,6 +49,7 @@ a {
     transition: width linear 0.1s, height linear 0.1s, top linear 0.1s, left linear 0.1s, opacity ease-in-out 0.2s;
     will-change: transform;
     &.hovering {
+        //when mouse hovers data-link html elements, apply changes
         top: -16px;
         left: -16px;
         width: 32px;
@@ -55,12 +58,14 @@ a {
     }
 }
 
+//re-usable class for centering children elements 
 .center-children {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+//dynamically generated letters using js 
 .letter {
     transition: color 0.1s ease-out;
     opacity: 0;
@@ -77,48 +82,3 @@ a {
         transform: translateY(0);
     }
 }
-
-// .button-cube {
-//     transform-style: preserve-3d;
-//     position: relative;
-//     margin-top: -60px; 
-//     margin-left: -150px; 
-//     transform-origin: 60px 30px -30px; 
-//     transform: rotateX(25deg) translateZ(-30px);
-//     transition: 0.5s transform ease-out;
-//     will-change: transform;
-//     .button-home {
-//         position: absolute;
-//         background: #1f1d1d; 
-//         border: 1px solid #fefefe;
-//         transition: 0.2s border ease; 
-//     }
-//     .front {
-//         width: 150px;
-//         height: 60px;
-//         transform: translateZ(30px);
-//     }
-//     .back {
-//         width: 150px;
-//         height: 60px;
-//         transform: translateZ(-30px) rotateX(180deg);
-//     }
-//     .top {
-//         width: 150px;
-//         height: 60px; 
-//         transform: translateY(-30px) rotateX(90deg);
-//     }
-//     .bottom {
-//         width: 150px; 
-//         height: 60px;
-//         transform: translateY(30px) rotateX(270deg);
-//     }
-//     &:hover {
-//         .button-home {
-//             border: 1px solid $green; 
-//         }
-//     }
-// .right {
-//     position: absolute;
-//     transform: translateX(50%) rotateY(90deg) translateZ(50%);
-// }

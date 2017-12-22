@@ -5,15 +5,52 @@ body
    height: 100%;
    margin: 0;
    padding: 0;
-   background: $white; 
-   font-family: 'Signika', sans-serif;
+   font-family: 'Signika', sans-serif; 
+   overflow: hidden;
+   background: #343434;
+   cursor: none;
 }
 
-.test {
+a {
+    cursor: none;
+    text-decoration: none;
+    &:hover {
+        cursor: none;
+    }
+}
+.cursor {
     position: absolute;
-    top: 0; 
-    left: 0; 
-    width: 100px; 
-    height: 200px; 
-    background: red; 
+    top: -3px;
+    left: -5px;
+    width: 2px;
+    height: 2px;
+    border-radius: 100%;
+    background: #fefefe;
+    will-change: transform;
+    z-index: 100;
+}
+.cursor-circle {
+    position: absolute;
+    top: -7px;
+    left: -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    background: rgba(0, 0, 0, 0);
+    border: solid 0.5px #fefefe;
+    transition: width linear 0.1s, height linear 0.1s, top linear 0.1s, left linear 0.1s, opacity ease-in-out 0.2s;
+    will-change: transform;
+    &.hovering {
+        top: -16px;
+        left: -16px;
+        width: 32px;
+        height: 32px;
+        opacity: 0.1;
+    }
+}
+
+.center-children {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

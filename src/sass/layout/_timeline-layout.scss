@@ -1,0 +1,69 @@
+.logo {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 12rem;
+    height: 12rem;
+    img {
+        width: 100%;
+        transition: opacity 0.2s ease;
+        will-change: opacity;
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}
+
+// .equalizer {
+//     position: absolute;
+//     bottom: 15%;
+//     left: 15%;
+//     .equalizer-container {
+//         padding: 2rem;
+//         transition: 0.2s opacity ease;
+//         will-change: opacity;
+//         &:hover {
+//             opacity: 0.5;
+//         }
+//         .equalizer-bar {
+//             width: 0.2rem;
+//             height: 1.5rem;
+//             background: $green;
+//             margin: 0rem 0.1rem;
+//             will-change: transform;
+//             transition: 0.1s color ease;
+//         }
+//         .equalizer-bar-1 {
+//             &.animation {
+//                 animation: equalizer 1.3s infinite both 0.7s;
+//             }
+//         }
+//         .equalizer-bar-2 {
+//             &.animation {
+//                 animation: equalizer 1.3s infinite both 0.1s;
+//             }
+//         }
+//         .equalizer-bar-3 {
+//             &.animation {
+//                 animation: equalizer 1.3s infinite both 0.3s;
+//             }
+//         }
+//         .equalizer-bar-4 {
+//             &.animation {
+//                 animation: equalizer 1.3s infinite both 1.3s;
+//             }
+//         }
+//         .equalizer-bar-5 {
+//             &.animation {
+//                 animation: equalizer 1.3s infinite both 1s;
+//             }
+//         }
+//     }
+// }
+
+// @keyframes equalizer {
+//     50% {
+//         background: #1b7e67;
+//         transform: scaleY(0.5)
+//     }
+// }

@@ -29,7 +29,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'scripts/[name].bundle.js'
+        filename: 'scripts/[name].bundle.js',
+        publicPath: '/'
     },
     module: {
         rules: [{
@@ -51,6 +52,12 @@ module.exports = {
             {
                 test: /\.(woff|woff2|eot|ttf)$/,
                 loader: 'url-loader?limit=100000'
+            },
+            {
+                test: /\.mp3?/,
+                use: [
+                    'file-loader?name=sounds/[name].[ext]',
+                ]
             },
             {
                 test: /\.json?/,
@@ -80,7 +87,7 @@ module.exports = {
             allChunks: true
         }),
         new HtmlWebpackPlugin({
-            title: 'spacex',
+            title: 'Space X Moments - Home',
             minify: {
                 collapseWhitespace: true
             },
@@ -90,7 +97,7 @@ module.exports = {
             template: './src/templates/index.ejs'
         }),
         new HtmlWebpackPlugin({
-            title: 'timeline',
+            title: 'Space X Moments - Timeline',
             minify: {
                 collapseWhitespace: true
             },

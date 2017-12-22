@@ -2,6 +2,8 @@
 import './sass/timeline.scss'
 
 //js
+import './components/timeline-layout.js'
+
 import {TweenMax, Power2, TimelineLite} from "gsap";
 
 const $container = document.querySelector('.container')
@@ -32,6 +34,8 @@ const $consequences = $indications.querySelector('.consequences')
 const $textConsequences = $indications.querySelector('.textConsequences')
 const $media = $indications.querySelector('.media')
 
+const image = require('./images/2006_03_24.jpg')
+
 const green = '#006d56'
 const red = '#841919'
 const dataArray = 
@@ -45,7 +49,7 @@ const dataArray =
     'reason' : 'The first stage having exploded as a result of a fuel leak.',
     'consequence' : 'Space X initially attributed the fire to an improperly tightened fuel-line nut. A later review by DARPA found that the nut was properly tightened, since its locking wire was still in place, but had failed because of corrosion from saltwater spray.',
     'details': 'The vehicle had a noticeable rolling motion after liftoff, as shown on the launch video rocking back and forth a bit. Impact onto dead reef about 250 feet from the launch site.',
-    'media': '../images/2010_12_08.jpg',
+    'media': `${image}`,
   },
   {
     'date' : 'March 21 2007',
@@ -56,7 +60,7 @@ const dataArray =
     'reason' : 'The second stage engine shutdown of a rool-control issue.',
     'consequence' : 'The rocket reached a final altitude of 289 km and a final velocity of 5.1 km/s compared to 7.5 km/s needed for orbit',
     'details': 'A circular coning oscillation began, which inscreased in amplitude until video was lost. The vehicle started to roll, and telemetry ended.',
-    'media': '../images/2007_03_21.3gp',
+    // 'media': './images/2007_03_21.3gp',
   },
   {
     'date' : 'August 3 2008',
@@ -67,7 +71,7 @@ const dataArray =
     'reason' : 'Collision between the first and second floors at the time of separation.',
     'consequence' : 'The first stage recontated the second stage, preventing successful completion of the mission. ',
     'details': 'Unexpected slow loading of helium onto the Falcon 1;  thus exposing the fuel and oxidizer to the cryogenic heliom, rendering the vehicle in a premature launch state. During the launch, small vehicle roll oscillations were visible. Residual fuel in the new Merclin 1C engine evaporated.',
-    'media': '../images/2008_08_03.jpg',
+    'media': './images/2008_08_03.jpg',
   },
   {
     'date' : 'September 28 2008',
@@ -78,7 +82,7 @@ const dataArray =
     'reason' : 'The fourth flight of the Falcon 1 rocket deliver a 165-kilogram non-functional boilerplate spacecraft in an orbit of 500 x 700 km inclined at 9.2 °.',
     'consequence' : "It was Falcon 1's first successful launch and the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket.",
     'details': 'The rocket follower the same trajectory as the previous flight, which failde to placed the others spacecraft into orbit. No major changes were made to the rocket. Except increasing the time betwween first-stage burnout and second-stage.separation.'  ,
-    'media': '../images/2008_09_28.jpg',
+    'media': './images/2008_09_28.jpg',
   },
   {
     'date' : 'July 13 2009',
@@ -89,7 +93,7 @@ const dataArray =
     'reason' : 'Falcon 1 successfully orbits a malaysian satellite.',
     'consequence' : 'The payload was then successfully deployed. After the launch Elon Musk, founder and CEO of SpaceX, told a reporter the launch had been a success. "We nailed the orbit to well within target parameters...pretty much a bullseye" Musk said.',
     'details': "The Falcon 1 successfully orbits commercial satellite Malaysia's RazakSAT, allowing to take high-resolution images of Malaysia to aid land management, resource development and conservation, forestry and fish migration studies.",
-    'media': '../images/2009_07_13.jpg',
+    'media': './images/2009_07_13.jpg',
   }
 ]
 
@@ -130,7 +134,6 @@ const init = () =>
 const offset = [{x:0 ,y : 0}]
 document.addEventListener('mousemove', (e) =>
 {
-
     offset.x = (window.innerWidth - e.clientX) / 30
     offset.y = (window.innerHeight - e.clientY) / 30
 
@@ -139,7 +142,6 @@ document.addEventListener('mousemove', (e) =>
     $plan3.style.transform = `translateX(${offset.x}px) translateY(${offset.y}px) translateZ(-600px) `
     $plan4.style.transform = `translateX(${offset.x}px) translateY(${-1500 +offset.y}px) translateZ(-70px) rotate(180deg)`
     $plan5.style.transform = `translateX(${offset.x}px) translateY(${-1500 + offset.y}px) translateZ(-600px)`
-    
 })
 
 // $visor.addEventListener('mousedown', () =>
@@ -152,7 +154,6 @@ document.addEventListener('mousemove', (e) =>
 
 $visor.addEventListener('click', () =>
 {
-    
     let tlAnimateIn = new TimelineLite()
     tlAnimateIn
         .to($line2, .5, {autoAlpha:1, height : 500})
@@ -164,7 +165,7 @@ $visor.addEventListener('click', () =>
 let currentSlide = 0
 
 
-$nextButton.addEventListener('click', () =>
+$nextButton.addEventListener('mousedown', () =>
 {
     $visor1.style.borderColor =  '#ffffff'
     $visor2.style.borderColor =  '#ffffff'
@@ -173,12 +174,10 @@ $nextButton.addEventListener('click', () =>
         animateOut(currentSlide)
         currentSlide++
         $container.style.transform = `rotateX(50deg) translateY(${coordinates[currentSlide].y}px) translateX(${coordinates[currentSlide].x}px)`
-        
     }
-    
 })
 
-$previousButton.addEventListener('click', () =>
+$previousButton.addEventListener('mousedown', () =>
 {
     $visor1.style.borderColor =  '#ffffff'
     $visor2.style.borderColor =  '#ffffff'
